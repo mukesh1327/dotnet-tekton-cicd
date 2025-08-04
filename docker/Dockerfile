@@ -3,12 +3,19 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 # Copy csproj and restore as distinct layers
-COPY ../*.csproj ./
+COPY Dotnet8-hello-world.sln ./
+COPY ../src/. ./src
+COPY ../tests/. ./tests/
+
+RUN ls -la 
+
 RUN dotnet restore
 
 # Copy entire project and build
-COPY ../. ./
-RUN dotnet publish -c Release -o /app/publish
+
+
+RUN ls -la
+RUN dotnet publish ./src/Dotnet8-hello-world.csproj -c Release -o /app/publish
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final

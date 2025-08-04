@@ -5,6 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Dotnet8_hello_world</RootNamespace>
+    <ContainerImageTags>$(CONTAINER_IMAGE_TAGS)</ContainerImageTags>
+    <ContainerRepository>$(CONTAINER_REPO_NAME)</ContainerRepository>
   </PropertyGroup>
 
   <ItemGroup>

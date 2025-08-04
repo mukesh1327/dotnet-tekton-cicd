@@ -1,0 +1,11 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: dotnet-build
+spec:
+  steps:
+    - name: build
+      image: mcr.microsoft.com/dotnet/sdk:8.0
+      workingDir: /workspace/source
+      script: |
+        dotnet build --configuration Debug
