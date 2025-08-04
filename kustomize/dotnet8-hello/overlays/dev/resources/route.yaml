@@ -1,0 +1,13 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: dotnet8-hello
+spec:
+  subdomain: dotnet8-hello
+  to:
+    kind: Service
+    name: dotnet8-hello
+    weight: 100
+  port:
+    targetPort: 8080-tcp
+  wildcardPolicy: None

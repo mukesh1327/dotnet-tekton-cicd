@@ -1,0 +1,35 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../../base
+
+- ./resources/route.yaml
+
+commonLabels:
+  app.kubernetes.io/part-of: dotnet8-hello
+  app.kubernetes.io/managed-by: kustomize
+
+replicas:
+- name: dotnet8-hello
+  count: 1
+
+patches:
+
+- path: ./patches/deployment-resources-patch.yaml
+  target: 
+    kind: Deployment
+    group: apps
+    version: v1
+    name: dotnet8-hello
+
+- path: ./patches/route-servicename-patch.yaml
+  target: 
+    kind: Route
+    group: route.openshift.io
+    version: v1
+    name: dotnet8-hello
+
+images:
+- name: quay.io/mukeshs1306/dotnet8-hello
+  newName: quay.io/mukeshs1306/dotnet8-hello
+  newTag: "latest"

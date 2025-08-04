@@ -1,0 +1,28 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+
+  name: {{ include "dotnet8-hello.fullname" . }}
+
+  labels:
+    {{- include "dotnet8-hello.labels" . | nindent 4 }}
+
+spec:
+  
+  subdomain: {{ .Values.route.subdomain }}
+
+  to:
+    kind: Service
+    name: {{ include "dotnet8-hello.fullname" . }}
+    weight: 100
+
+  port:
+    targetPort: {{ .Values.service.port }}
+ 
+  {{- if .Values.route.tls.enabled }}
+  tls:
+    termination: {{ .Values.route.tls.termination }}
+    insecureEdgeTerminationPolicy: {{ .Values.route.tls.insecureEdgeTerminationPolicy }}
+  {{- end }}
+
+  wildcardPolicy: None

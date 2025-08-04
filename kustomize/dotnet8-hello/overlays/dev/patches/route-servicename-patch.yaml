@@ -1,0 +1,4 @@
+[
+  {"op": "add", "path": "/spec/subdomain", "value": "dotnet8-hello-kustomize"},
+  {"op": "add", "path": "/spec/to/name", "value": "dotnet8-hello"}
+]
